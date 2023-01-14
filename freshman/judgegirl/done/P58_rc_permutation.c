@@ -1,7 +1,7 @@
 # define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-/*
+
 void bbsort(int arr[], int n) {
     for (int i = 0; i < n; i++)
         for (int j = 0; j < n - i - 1; j++)
@@ -29,10 +29,10 @@ void f(int index, int arr[], int used[], int tmp[], int n) {
     }
 }
 
-// ¥ý±N¤@¼h¼hf¤¤ªºarr³]¸m¬°used = 1, µM«á¦b³Ì«á¤@­Ó(index = n - 1) ªºf³]¸m§¹«á, «K·|print¤@¦¸
-// , µM«á±N³Ì«á¤@­ÓusedÅÜ¬°0, µM«á±µµÛ©¹¦^¶]index = n - 2®Éªºused = 0, µM«á´N¤S·|¶i¤J(index = n - 1) ªº¤l°ÝÃD
-// , ¦]¬°else ¤¤ªºfor°j°é·|§â i++;
-// µM«áindex = n - 2°õ¦æ§¹´N·|¶iindex = n - 3, ¤@¸ô°µ§¹
+// ï¿½ï¿½ï¿½Nï¿½@ï¿½hï¿½hfï¿½ï¿½ï¿½ï¿½arrï¿½]ï¿½mï¿½ï¿½used = 1, ï¿½Mï¿½ï¿½bï¿½Ì«ï¿½@ï¿½ï¿½(index = n - 1) ï¿½ï¿½fï¿½]ï¿½mï¿½ï¿½ï¿½ï¿½, ï¿½Kï¿½|printï¿½@ï¿½ï¿½
+// , ï¿½Mï¿½ï¿½Nï¿½Ì«ï¿½@ï¿½ï¿½usedï¿½Ü¬ï¿½0, ï¿½Mï¿½á±µï¿½Û©ï¿½ï¿½^ï¿½]index = n - 2ï¿½Éªï¿½used = 0, ï¿½Mï¿½ï¿½Nï¿½Sï¿½|ï¿½iï¿½J(index = n - 1) ï¿½ï¿½ï¿½lï¿½ï¿½ï¿½D
+// , ï¿½]ï¿½ï¿½else ï¿½ï¿½ï¿½ï¿½forï¿½jï¿½ï¿½|ï¿½ï¿½ i++;
+// ï¿½Mï¿½ï¿½index = n - 2ï¿½ï¿½ï¿½æ§¹ï¿½Nï¿½|ï¿½iindex = n - 3, ï¿½@ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 int main() {
     int n;
@@ -47,4 +47,3 @@ int main() {
 
     return 0;
 }
-*/

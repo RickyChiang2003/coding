@@ -7,7 +7,7 @@
 #include <string.h>
 #include <time.h>
 
-/*
+
 void swap(long long* a, long long* b) {
 	long long t = *a;
 	*a = *b;
@@ -62,4 +62,4 @@ int main() {
 	}
 
 	return 0;
-}*/
+}

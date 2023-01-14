@@ -6,7 +6,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <time.h>
-/*
+
 //intersection; T-junction; turn; dead
 void intersection(int map[100][100], int result[4]) {
 
@@ -43,4 +43,3 @@ void intersection(int map[100][100], int result[4]) {
 
 	return;
 }
-*/

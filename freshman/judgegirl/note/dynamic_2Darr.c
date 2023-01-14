@@ -1,9 +1,9 @@
 # define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
-/*
+
 //this one is better
-int main() {
+int better() {
 	int R, C;
 	scanf("%d%d", &R, &C);
 	int** arr = calloc(R, sizeof(*arr));
@@ -16,13 +16,13 @@ int main() {
 		free(arr[i]);
 	free(arr);
 }
-*/
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/*
+
 //this one is not good
-int main() {
+int notgood(){
 
 	const int sizex = 3;
 	const int sizey = 2;
@@ -42,4 +42,3 @@ int main() {
 	free(ia);
 
 }
-*/

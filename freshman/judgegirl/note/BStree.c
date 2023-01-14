@@ -1,11 +1,6 @@
 # define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h> //atoi()
-#include <stdbool.h>
-#include <assert.h>
-#include <ctype.h>
-#include <string.h>
-#include <time.h>
 
 
 typedef struct Treenode {

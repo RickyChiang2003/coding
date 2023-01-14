@@ -6,7 +6,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <time.h>
-/*
+
 void process(int n, int p, int sum, int arr[], int total[]) {
     if (p == n) {
         total[sum]++;
@@ -35,4 +35,3 @@ int main() {
     }
     return 0;
 }
-*/

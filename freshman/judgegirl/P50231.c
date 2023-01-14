@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <assert.h>
-/*
+
 
 int find(int x, int y, int k, int s, int hash[20001][11][3], int c, int kase) {
     int f = (77 * k + 2222) % s;
@@ -96,4 +96,4 @@ int main() {
             p2[0] = x, p2[1] = y;
         }
     }
-}*/
+}
