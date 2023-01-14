@@ -1,78 +1,58 @@
-# define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <stdlib.h>
 
-void check(int F[9][9], int ans[9][9], int tmp[9][9], int* halt) {
-	if (!*halt) {
+void find(int n, int a[9][9], int b[11][11]){
+	if (n == 81){
+		int cnt = 0, sum = 0;
 		for (int i = 0; i < 9; i++)
 			for (int j = 0; j < 9; j++)
-				if (F[i][j] != tmp[i][j]) return;
-		*halt = 1;
-		for (int i = 0; i < 9; i++)
-			for (int j = 0; j < 9; j++)
-				printf("%d%c", ans[i][j], j == 8 ? '\n' : ' ');
-	}
-}
-
-void adjust(int i, int j, int tmp[9][9], int d) {
-	int x, y;
-	for (int dx = -1; dx <= 1; dx++)
-		for (int dy = -1; dy <= 1; dy++) {
-			x = i + dx;
-			y = j + dy;
-			if (x >= 0 && x < 9 && y >= 0 && y < 9)
-				tmp[x][y] += d;
+				if (a[i][j] == 0) cnt++;
+		if (cnt != n)
+			return;
+		else{
+			for (int i = 1; i <= 9; i++)
+				for (int j = 1; j <= 9; j++)
+					printf("%d%c", b[i][j], j == 9 ? '\n' : ' ');
+			exit(0);
 		}
-}
+	}
 
-void process(int i, int j, int F[9][9], int ans[9][9], int tmp[9][9], int* halt) {
-	/*
-	for (int i = 0; i < 9; i++)
+	int r = n / 9, c = n % 9, temp = 0, flag = 0;
+	for (int i = 0; i < r - 1; i++)
 		for (int j = 0; j < 9; j++)
-			printf("%d%c", tmp[i][j], j == 8 ? '\n' : ' ');
-	*/
-	if (!*halt) {
-		if (i == 8 && j == 8) {
-			if (ans[i][j])
-				adjust(i, j, tmp, -1);
-			ans[i][j] = 0;
-			check(F, ans, tmp, halt);
+			if (a[i][j] != 0) 
+				flag = 1;
+	if (flag == 1) 
+		return;
 
-			ans[i][j] = 1;
-			adjust(i, j, tmp, 1);
-			check(F, ans, tmp, halt);
-		}
-		else {
-			//printf("i = %d, j = %d\n", i, j);
-			int ti = (j == 8) ? i + 1 : i;
-			int tj = (j == 8) ? 0 : j + 1;
+	b[r + 1][c + 1] = 1;
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+			if (r + i > 0 && r + i <= 9 && c + j > 0 && c + j <= 9){
+				a[r - 1 + i][c - 1 + j]--;
+				if (a[r - 1 + i][c - 1 + j] < 0) 
+					flag = 1;
+			}
+	
+	if (flag == 0)
+		find(n + 1, a, b);
+	
+	b[r + 1][c + 1] = 0;
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+			if (r + i > 0 && r + i <= 9 && c + j > 0 && c + j <= 9)
+				a[r - 1 + i][c - 1 + j]++;
 
-			if (ans[i][j])
-				adjust(i, j, tmp, -1);
-			ans[i][j] = 0;
-			process(ti, tj, F, ans, tmp, halt);
-
-			ans[i][j] = 1;
-			adjust(i, j, tmp, 1);
-			process(ti, tj, F, ans, tmp, halt);
-
-		}
-	}
+	find(n + 1, a, b);
 }
 
 int main() {
-	int F[9][9] = { 0 };
-	int ans[9][9] = { 0 };
-	int tmp[9][9] = { 0 };
+	int a[9][9], b[11][11] = {0};
 	for (int i = 0; i < 9; i++)
 		for (int j = 0; j < 9; j++)
-			scanf("%d", &(F[i][j]));
-
-	int halt = 0;
-	process(0, 0, F, ans, tmp, &halt);
-
-	if (!halt)
-		printf("no solution\n");
-
-
+			scanf("%d", &a[i][j]);
+	find(0, a, b);
+	printf("no solution\n");
 	return 0;
 }

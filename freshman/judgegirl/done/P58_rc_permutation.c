@@ -29,10 +29,10 @@ void f(int index, int arr[], int used[], int tmp[], int n) {
     }
 }
 
-// ���N�@�h�hf����arr�]�m��used = 1, �M��b�̫�@��(index = n - 1) ��f�]�m����, �K�|print�@��
-// , �M��N�̫�@��used�ܬ�0, �M�ᱵ�۩��^�]index = n - 2�ɪ�used = 0, �M��N�S�|�i�J(index = n - 1) ���l���D
-// , �]��else ����for�j��|�� i++;
-// �M��index = n - 2���槹�N�|�iindex = n - 3, �@������
+// 先將一層層f中的arr設置為used = 1, 然後在最後一個(index = n - 1) 的f設置完後, 便會print一次
+// , 然後將最後一個used變為0, 然後接著往回跑index = n - 2時的used = 0, 然後就又會進入(index = n - 1) 的子問題
+// , 因為else 中的for迴圈會把 i++;
+// 然後index = n - 2執行完就會進index = n - 3, 一路做完
 
 int main() {
     int n;
