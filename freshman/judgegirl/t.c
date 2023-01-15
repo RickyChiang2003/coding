@@ -4,18 +4,14 @@
 
 void find(int n, int a[9][9], int b[11][11]){
 	if (n == 81){
-		int cnt = 0, sum = 0;
 		for (int i = 0; i < 9; i++)
 			for (int j = 0; j < 9; j++)
-				if (a[i][j] == 0) cnt++;
-		if (cnt != n)
-			return;
-		else{
-			for (int i = 1; i <= 9; i++)
-				for (int j = 1; j <= 9; j++)
-					printf("%d%c", b[i][j], j == 9 ? '\n' : ' ');
-			exit(0);
-		}
+				if (a[i][j] != 0) 
+					return;
+		for (int i = 1; i <= 9; i++)
+			for (int j = 1; j <= 9; j++)
+				printf("%d%c", b[i][j], j == 9 ? '\n' : ' ');
+		exit(0);		
 	}
 
 	int r = n / 9, c = n % 9, temp = 0, flag = 0;
