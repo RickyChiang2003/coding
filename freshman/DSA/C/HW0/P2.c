@@ -41,19 +41,13 @@ int bars_correct(int R, int C, int B[][SIZE], int cond[][SIZE][SIZE], int l, int
 	    barlen++;
 	}
 	if(bar == -1 && black){
-//	    printf("i = %d, barlen = %d, cond[%d][%d][%d] = %d\n", i, barlen, l, n, flag, cond[l][n][flag]);
-	
 	    if(cond[l][n][flag] != barlen || !(cond[l][n][flag])){
-//		printf("badbadbadbadbadbadbaedbadbaedbaedbadbadbad\n");
 		return 0;
 	    }
-
-//	    print(R, C, B);
 	    barlen = 0;
 	    black = 0;
 	    flag++;
 	}
-	
     }
     if(black){
 	if(cond[l][n][flag] != barlen || !(cond[l][n][flag]))
@@ -90,10 +84,7 @@ void findcell(int R, int C, int B[][SIZE], int *r, int *c){
 
 
 int paint(int R, int C, int flag, int B[][SIZE], int cond[][SIZE][SIZE]){
-//    printf("flag = %d\n", flag);
-//    print(R, C, B);
     if(flag == 0){
-	//if(B[2][2] == -1)exit(-1);
 	if(valid(R, C, B, cond)){
 	    print(R, C, B);
 	    return 1;
