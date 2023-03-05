@@ -1,7 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
-# define SIZE 25
+# define SIZE 26
 
 
 void print(int R, int C, int B[][SIZE]){
@@ -24,6 +22,33 @@ void input(int* R, int* C, int* flag, int B[][SIZE], int cond[][SIZE][SIZE]){
 	    for(int j = 0; j < bars; j++)
 		scanf("%d", &(cond[l][i][j]));
 	}
+}
+
+
+void init(int R, int C, int cond[][SIZE][SIZE], int maxbars[][SIZE]){
+    int L[2] = {R, C};
+    for(int i = 0; i < 2; i++)
+	for(int j = 0; cond[i][j][0] != 0; j++)
+	    for(int flag = 0; cond[i][j][flag] != 0; flag++)
+		maxbars[i][j] += cond[i][j][flag];
+	
+    for(int i = 0; i < 2; i++)
+	for(int j = 0; maxbars[i][j] != 0; j++)
+	    maxbars[i][j] += (L[i] - maxbars[i][j]) * 100;
+}
+
+
+int pruning(int maxbars[][SIZE], int prun[][SIZE], int r, int c){
+//   for(int i = 0; i < SIZE; i++)
+//	printf("%d%c", maxbars[0][i], (i == SIZE-1)?'\n' : ' ');
+//   for(int i = 0; i < SIZE; i++)
+//	printf("%d%c", prun[0][i], (i == SIZE-1)?'\n' : ' ');
+//
+    if(maxbars[0][r] % 100 < prun[0][r] % 100 || maxbars[0][r] / 100 < prun[0][r] / 100)
+	return 0;
+    if(maxbars[1][c] % 100 < prun[1][c] % 100 || maxbars[1][c] / 100 < prun[1][c] / 100)
+	return 0;
+    return 1;
 }
 
 
@@ -63,6 +88,8 @@ int bars_correct(int R, int C, int B[][SIZE], int cond[][SIZE][SIZE], int l, int
 
 int valid(int R, int C, int B[][SIZE], int cond[][SIZE][SIZE]){
     int L[2] = {R, C};
+    //print(R, C, B);
+
     for(int l = 0; l < 2; l++)
 	for(int i = 0; cond[l][i][0] != 0; i++){
 	    if(!bars_correct(R, C, B, cond, l, i))
@@ -83,13 +110,13 @@ void findcell(int R, int C, int B[][SIZE], int *r, int *c){
 }
 
 
-int paint(int R, int C, int flag, int B[][SIZE], int cond[][SIZE][SIZE]){
+int paint(int R, int C, int flag, int B[][SIZE], int cond[][SIZE][SIZE], int maxbars[][SIZE], int prun[][SIZE]){
     if(flag == 0){
 	if(valid(R, C, B, cond)){
 	    print(R, C, B);
 	    return 1;
 	}
-
+	
 	flag++;
 	return 0;
     }
@@ -98,15 +125,19 @@ int paint(int R, int C, int flag, int B[][SIZE], int cond[][SIZE][SIZE]){
 	flag--;
 	int r, c;
        	findcell(R, C, B, &r, &c);
-	B[r][c] = 1;
-	if(paint(R, C, flag, B, cond))
-	    return 1;
-	B[r][c] = -1;
-	if(paint(R, C, flag, B, cond))
-	    return 1;
+	B[r][c] = 1, prun[0][r]++, prun[1][c]++;
+	if(pruning(maxbars, prun, r, c))
+	    if(paint(R, C, flag, B, cond, maxbars, prun))
+		return 1;
+
+	B[r][c] = -1, prun[0][r] += 99, prun[1][c] += 99;
+	if(pruning(maxbars, prun, r, c))
+	    if(paint(R, C, flag, B, cond, maxbars, prun))
+		return 1;
+
 
 	flag++;
-	B[r][c] = 0;
+	B[r][c] = 0, prun[0][r] -= 100, prun[1][c] -= 100;
 	return 0;
     }
 }
@@ -116,9 +147,12 @@ int main(){
     int R, C, flag = 0;
     int cond[2][SIZE][SIZE] = {0};
     int B[SIZE][SIZE] = {0};
+    int maxbars[2][SIZE] = {0};
+    int prun[2][SIZE] = {0};
     
     input(&R, &C, &flag, B, cond);
-    paint(R, C, flag, B, cond);
+    init(R, C, cond, maxbars);
+    paint(R, C, flag, B, cond, maxbars, prun);
 
 
     return 0;
