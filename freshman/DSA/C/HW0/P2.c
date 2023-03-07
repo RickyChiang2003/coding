@@ -39,11 +39,6 @@ void init(int R, int C, int cond[][SIZE][SIZE], int maxbars[][SIZE]){
 
 
 int pruning(int maxbars[][SIZE], int prun[][SIZE], int r, int c){
-//   for(int i = 0; i < SIZE; i++)
-//	printf("%d%c", maxbars[0][i], (i == SIZE-1)?'\n' : ' ');
-//   for(int i = 0; i < SIZE; i++)
-//	printf("%d%c", prun[0][i], (i == SIZE-1)?'\n' : ' ');
-//
     if(maxbars[0][r] % 100 < prun[0][r] % 100 || maxbars[0][r] / 100 < prun[0][r] / 100)
 	return 0;
     if(maxbars[1][c] % 100 < prun[1][c] % 100 || maxbars[1][c] / 100 < prun[1][c] / 100)
@@ -88,8 +83,6 @@ int bars_correct(int R, int C, int B[][SIZE], int cond[][SIZE][SIZE], int l, int
 
 int valid(int R, int C, int B[][SIZE], int cond[][SIZE][SIZE]){
     int L[2] = {R, C};
-    //print(R, C, B);
-
     for(int l = 0; l < 2; l++)
 	for(int i = 0; cond[l][i][0] != 0; i++){
 	    if(!bars_correct(R, C, B, cond, l, i))
@@ -134,7 +127,6 @@ int paint(int R, int C, int flag, int B[][SIZE], int cond[][SIZE][SIZE], int max
 	if(pruning(maxbars, prun, r, c))
 	    if(paint(R, C, flag, B, cond, maxbars, prun))
 		return 1;
-
 
 	flag++;
 	B[r][c] = 0, prun[0][r] -= 100, prun[1][c] -= 100;
