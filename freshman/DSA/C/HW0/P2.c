@@ -28,13 +28,15 @@ void input(int* R, int* C, int* flag, int B[][SIZE], int cond[][SIZE][SIZE]){
 void init(int R, int C, int cond[][SIZE][SIZE], int maxbars[][SIZE]){
     int L[2] = {R, C};
     for(int i = 0; i < 2; i++)
-	for(int j = 0; cond[i][j][0] != 0; j++)
+	for(int j = 0; j < L[i]; j++)
 	    for(int flag = 0; cond[i][j][flag] != 0; flag++)
 		maxbars[i][j] += cond[i][j][flag];
 	
     for(int i = 0; i < 2; i++)
-	for(int j = 0; maxbars[i][j] != 0; j++)
-	    maxbars[i][j] += (L[i] - maxbars[i][j]) * 100;
+	for(int j = 0; j < L[i]; j++){
+	    int tmpi = (i) ? 0 : 1;
+	    maxbars[i][j] += (L[tmpi] - maxbars[i][j]) * 100;
+	}
 }
 
 
@@ -84,12 +86,10 @@ int bars_correct(int R, int C, int B[][SIZE], int cond[][SIZE][SIZE], int l, int
 int valid(int R, int C, int B[][SIZE], int cond[][SIZE][SIZE]){
     int L[2] = {R, C};
     for(int l = 0; l < 2; l++)
-	for(int i = 0; cond[l][i][0] != 0; i++){
+	for(int i = 0; cond[l][i][0] != 0; i++)
 	    if(!bars_correct(R, C, B, cond, l, i))
 		    return 0;
-	}
     return 1;
-
 }
 
 
